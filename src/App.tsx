@@ -8,7 +8,7 @@ import Analisa from './pages/Analisa'
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/awl/">
       <Routes>
         <Route path="/" element={<Navigate to="/beranda" replace />} />
         <Route path="/beranda" element={<Beranda />} />
