@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import L from 'leaflet'
-import { Compass, Search, RefreshCw, BookOpen, Navigation, Menu } from 'lucide-react'
+import { Compass, Search, RefreshCw, BookOpen, Navigation } from 'lucide-react'
 import BottomNav from '../components/BottomNav'
 import MapLegend from '../components/MapLegend'
 
@@ -56,7 +56,6 @@ function createDivIcon(color: string) {
 export default function Peta() {
   const [showLegend, setShowLegend] = useState(false)
   const [mapReady, setMapReady] = useState(false)
-  const [showNavOverlay, setShowNavOverlay] = useState(false)
 
   useEffect(() => {
     setMapReady(true)
@@ -123,29 +122,7 @@ export default function Peta() {
         <button data-testid="peta-navigation" className="absolute bottom-20 right-3 z-[1200] bg-blue-600 rounded-full shadow-lg p-3" aria-label="Navigasi">
           <Navigation size={22} className="text-white" />
         </button>
-
-        {/* Menu button: show bottom nav overlay so it's easy to tap */}
-        <button
-          type="button"
-          data-testid="peta-menu"
-          onClick={() => setShowNavOverlay(true)}
-          className="absolute bottom-20 left-1/2 -translate-x-1/2 z-[1200] bg-blue-600 text-white rounded-full shadow-lg px-4 py-2.5 flex items-center gap-2"
-          aria-label="Tampilkan menu"
-        >
-          <Menu size={20} />
-          <span className="text-sm font-medium">Menu</span>
-        </button>
       </div>
-
-      {/* Backdrop when "Menu" is pressed: dims map so nav is clearly on top */}
-      {showNavOverlay && (
-        <button
-          type="button"
-          aria-label="Tutup menu"
-          className="fixed inset-0 z-[1050] bg-black/30"
-          onClick={() => setShowNavOverlay(false)}
-        />
-      )}
 
       <BottomNav />
     </div>

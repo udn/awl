@@ -69,13 +69,6 @@ test.describe('Peta', () => {
     await page.getByTestId('peta-navigation').click()
   })
 
-  test('Menu button opens overlay and bottom nav stays clickable', async ({ page }) => {
-    await page.goto('/awl/peta')
-    await page.getByTestId('peta-menu').click()
-    await expect(page.getByRole('button', { name: /tutup menu/i })).toBeVisible()
-    await page.getByTestId('nav-beranda').click()
-    await expect(page).toHaveURL(/\/beranda/)
-  })
 })
 
 test.describe('Monitoring', () => {
