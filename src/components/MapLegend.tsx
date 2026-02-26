@@ -22,6 +22,7 @@ export default function MapLegend() {
   return (
     <div className="bg-white rounded-xl shadow-lg overflow-hidden" style={{ minWidth: 260 }}>
       <button
+        data-testid="map-legend-toggle"
         onClick={() => setOpen(o => !o)}
         className="w-full flex items-center justify-between px-3 py-2 bg-blue-600 text-white text-sm font-semibold"
       >

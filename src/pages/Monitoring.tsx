@@ -135,6 +135,7 @@ export default function Monitoring() {
           </p>
         </div>
         <button
+          data-testid="monitoring-settings"
           onClick={toggleSettings}
           className="p-1.5 rounded-full bg-white bg-opacity-60"
           aria-label="Pengaturan batas"
@@ -148,7 +149,7 @@ export default function Monitoring() {
         <div className="mx-3 mt-2 bg-white rounded-xl shadow-sm p-4">
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-sm font-bold text-gray-800">Konfigurasi Batas Siaga</h2>
-            <button onClick={() => setShowSettings(false)}>
+            <button data-testid="monitoring-settings-close" onClick={() => setShowSettings(false)} aria-label="Tutup">
               <X size={16} className="text-gray-400" />
             </button>
           </div>
@@ -164,6 +165,7 @@ export default function Monitoring() {
                 <span className={`text-xs font-medium ${color} flex-1`}>{label}</span>
                 <div className="flex items-center gap-1">
                   <button
+                    data-testid={`threshold-${key}-down`}
                     className="w-6 h-6 rounded bg-gray-100 flex items-center justify-center"
                     onClick={() => setPendingThresholds(p => ({ ...p, [key]: Math.max(0.1, +(p[key] - 0.1).toFixed(1)) }))}
                   >
@@ -179,6 +181,7 @@ export default function Monitoring() {
                     className="w-16 text-center text-sm border border-gray-200 rounded py-0.5"
                   />
                   <button
+                    data-testid={`threshold-${key}-up`}
                     className="w-6 h-6 rounded bg-gray-100 flex items-center justify-center"
                     onClick={() => setPendingThresholds(p => ({ ...p, [key]: +(p[key] + 0.1).toFixed(1) }))}
                   >
@@ -192,6 +195,7 @@ export default function Monitoring() {
             <p className="text-xs text-red-500 mt-2">Waspada &lt; Bahaya &lt; Maks diperlukan.</p>
           )}
           <button
+            data-testid="monitoring-apply"
             onClick={applyThresholds}
             disabled={pendingThresholds.warning >= pendingThresholds.danger || pendingThresholds.danger >= pendingThresholds.max}
             className="mt-3 w-full py-2 bg-blue-600 text-white text-sm rounded-lg font-medium disabled:opacity-40"
@@ -242,6 +246,7 @@ export default function Monitoring() {
       {/* Historical log */}
       <div className="mx-3 mt-2 bg-white rounded-xl shadow-sm overflow-hidden mb-2">
         <button
+          data-testid="monitoring-log-toggle"
           className="w-full flex items-center justify-between px-4 py-3"
           onClick={() => setShowLog(o => !o)}
         >

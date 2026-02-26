@@ -41,11 +41,11 @@ export default function Analisa() {
     <div className="flex flex-col min-h-screen bg-gray-50 pb-4">
       {/* Header */}
       <div className="bg-blue-600 text-white flex items-center gap-3 px-4 pt-10 pb-4">
-        <button onClick={() => navigate(-1)} className="p-1">
+        <button data-testid="analisa-back" onClick={() => navigate(-1)} className="p-1" aria-label="Kembali">
           <ArrowLeft size={22} />
         </button>
         <h1 className="flex-1 text-base font-bold">Analisa</h1>
-        <button className="p-1"><Download size={22} /></button>
+        <button data-testid="analisa-download" className="p-1" aria-label="Unduh"><Download size={22} /></button>
       </div>
 
       {/* Station info */}
@@ -64,6 +64,7 @@ export default function Analisa() {
         {tabs.map((tab, i) => (
           <button
             key={tab}
+            data-testid={`analisa-tab-${tab.toLowerCase()}`}
             onClick={() => setActiveTab(i)}
             className={`flex-1 py-2.5 text-sm font-medium ${
               activeTab === i

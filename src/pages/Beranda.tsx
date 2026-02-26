@@ -22,6 +22,7 @@ export default function Beranda() {
         {stations.map(st => (
           <button
             key={st.id}
+            data-testid={`station-${st.id}`}
             onClick={() => navigate('/analisa')}
             className="w-full bg-white rounded-xl p-4 shadow-sm flex items-center gap-3 text-left"
           >

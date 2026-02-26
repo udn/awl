@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import L from 'leaflet'
-import { Compass, Search, RefreshCw, BookOpen, Navigation } from 'lucide-react'
+import { Compass, Search, RefreshCw, BookOpen, Navigation, Menu } from 'lucide-react'
 import BottomNav from '../components/BottomNav'
 import MapLegend from '../components/MapLegend'
 
@@ -56,6 +56,7 @@ function createDivIcon(color: string) {
 export default function Peta() {
   const [showLegend, setShowLegend] = useState(false)
   const [mapReady, setMapReady] = useState(false)
+  const [showNavOverlay, setShowNavOverlay] = useState(false)
 
   useEffect(() => {
     setMapReady(true)
@@ -64,11 +65,11 @@ export default function Peta() {
   return (
     <div className="flex flex-col h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-white flex items-center gap-3 px-4 pt-10 pb-3 shadow-sm z-10">
+      <div className="bg-white flex items-center gap-3 px-4 pt-10 pb-3 shadow-sm z-[1100]">
         <Compass size={22} className="text-blue-600" />
         <h1 className="flex-1 text-base font-bold text-gray-800">Peta Lokasi Pos</h1>
-        <button className="p-1.5 rounded-full hover:bg-gray-100"><Search size={20} className="text-gray-600" /></button>
-        <button className="p-1.5 rounded-full hover:bg-gray-100"><RefreshCw size={20} className="text-gray-600" /></button>
+        <button data-testid="peta-search" className="p-1.5 rounded-full hover:bg-gray-100" aria-label="Cari"><Search size={20} className="text-gray-600" /></button>
+        <button data-testid="peta-refresh" className="p-1.5 rounded-full hover:bg-gray-100" aria-label="Segarkan"><RefreshCw size={20} className="text-gray-600" /></button>
       </div>
 
       {/* Map */}
@@ -79,6 +80,7 @@ export default function Peta() {
             zoom={11}
             style={{ height: '100%', width: '100%' }}
             zoomControl={false}
+            className="z-0"
           >
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -111,15 +113,39 @@ export default function Peta() {
 
         {/* FABs */}
         <button
+          data-testid="peta-legend"
           onClick={() => setShowLegend(o => !o)}
           className="absolute bottom-4 left-3 z-[1000] bg-white rounded-full shadow-lg p-3"
+          aria-label="Legenda"
         >
           <BookOpen size={22} className="text-blue-600" />
         </button>
-        <button className="absolute bottom-4 right-3 z-[1000] bg-blue-600 rounded-full shadow-lg p-3">
+        <button data-testid="peta-navigation" className="absolute bottom-4 right-3 z-[1000] bg-blue-600 rounded-full shadow-lg p-3" aria-label="Navigasi">
           <Navigation size={22} className="text-white" />
         </button>
+
+        {/* Menu button: show bottom nav overlay so it's easy to tap */}
+        <button
+          type="button"
+          data-testid="peta-menu"
+          onClick={() => setShowNavOverlay(true)}
+          className="absolute bottom-16 left-1/2 -translate-x-1/2 z-[1000] bg-blue-600 text-white rounded-full shadow-lg px-4 py-2.5 flex items-center gap-2"
+          aria-label="Tampilkan menu"
+        >
+          <Menu size={20} />
+          <span className="text-sm font-medium">Menu</span>
+        </button>
       </div>
+
+      {/* Backdrop when "Menu" is pressed: dims map so nav is clearly on top */}
+      {showNavOverlay && (
+        <button
+          type="button"
+          aria-label="Tutup menu"
+          className="fixed inset-0 z-[1050] bg-black/30"
+          onClick={() => setShowNavOverlay(false)}
+        />
+      )}
 
       <BottomNav />
     </div>
