@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test'
 
 test.describe('Bottom navigation', () => {
   test('all nav tabs navigate correctly', async ({ page }) => {
-    await page.goto('/')
+    await page.goto('/awl/')
     await expect(page).toHaveURL(/\/beranda/)
 
     await page.getByTestId('nav-peta').click()
@@ -24,7 +24,7 @@ test.describe('Bottom navigation', () => {
 
 test.describe('Beranda', () => {
   test('station buttons navigate to Analisa', async ({ page }) => {
-    await page.goto('/beranda')
+    await page.goto('/awl/beranda')
     await page.getByTestId('station-1').click()
     await expect(page).toHaveURL(/\/analisa/)
     await expect(page.getByRole('heading', { name: 'Analisa' })).toBeVisible()
@@ -33,7 +33,7 @@ test.describe('Beranda', () => {
 
 test.describe('Analisa', () => {
   test('back button returns to previous page', async ({ page }) => {
-    await page.goto('/beranda')
+    await page.goto('/awl/beranda')
     await page.getByTestId('station-1').click()
     await expect(page).toHaveURL(/\/analisa/)
     await page.getByTestId('analisa-back').click()
@@ -41,7 +41,7 @@ test.describe('Analisa', () => {
   })
 
   test('tabs switch (Hari, Bulan, Tahun)', async ({ page }) => {
-    await page.goto('/analisa')
+    await page.goto('/awl/analisa')
     await page.getByTestId('analisa-tab-hari').click()
     await expect(page.getByTestId('analisa-tab-hari')).toHaveClass(/border-blue-600/)
     await page.getByTestId('analisa-tab-bulan').click()
@@ -51,7 +51,7 @@ test.describe('Analisa', () => {
   })
 
   test('download button is clickable', async ({ page }) => {
-    await page.goto('/analisa')
+    await page.goto('/awl/analisa')
     await expect(page.getByTestId('analisa-download')).toBeEnabled()
     await page.getByTestId('analisa-download').click()
     // No error = button works (download may do nothing in test env)
@@ -60,7 +60,7 @@ test.describe('Analisa', () => {
 
 test.describe('Peta', () => {
   test('search, refresh, legend, navigation buttons are clickable', async ({ page }) => {
-    await page.goto('/peta')
+    await page.goto('/awl/peta')
     await page.getByTestId('peta-search').click()
     await page.getByTestId('peta-refresh').click()
     await page.getByTestId('peta-legend').click()
@@ -70,7 +70,7 @@ test.describe('Peta', () => {
   })
 
   test('Menu button opens overlay and bottom nav stays clickable', async ({ page }) => {
-    await page.goto('/peta')
+    await page.goto('/awl/peta')
     await page.getByTestId('peta-menu').click()
     await expect(page.getByRole('button', { name: /tutup menu/i })).toBeVisible()
     await page.getByTestId('nav-beranda').click()
@@ -80,7 +80,7 @@ test.describe('Peta', () => {
 
 test.describe('Monitoring', () => {
   test('settings open, apply, close', async ({ page }) => {
-    await page.goto('/monitoring')
+    await page.goto('/awl/monitoring')
     await page.getByTestId('monitoring-settings').click()
     await expect(page.getByText('Konfigurasi Batas Siaga')).toBeVisible()
     await page.getByTestId('threshold-warning-up').click()
@@ -89,7 +89,7 @@ test.describe('Monitoring', () => {
   })
 
   test('settings close (X) button', async ({ page }) => {
-    await page.goto('/monitoring')
+    await page.goto('/awl/monitoring')
     await page.getByTestId('monitoring-settings').click()
     await expect(page.getByText('Konfigurasi Batas Siaga')).toBeVisible()
     await page.getByTestId('monitoring-settings-close').click()
@@ -97,7 +97,7 @@ test.describe('Monitoring', () => {
   })
 
   test('log toggle expands and collapses', async ({ page }) => {
-    await page.goto('/monitoring')
+    await page.goto('/awl/monitoring')
     await expect(page.getByText('Log Pembacaan')).toBeVisible()
     await page.getByTestId('monitoring-log-toggle').click()
     await expect(page.locator('table')).not.toBeVisible()

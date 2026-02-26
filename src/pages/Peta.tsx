@@ -106,7 +106,7 @@ export default function Peta() {
 
         {/* Legend overlay */}
         {showLegend && (
-          <div className="absolute bottom-20 left-3 z-[1000]">
+          <div className="absolute bottom-36 left-3 z-[1200]">
             <MapLegend />
           </div>
         )}
@@ -115,12 +115,12 @@ export default function Peta() {
         <button
           data-testid="peta-legend"
           onClick={() => setShowLegend(o => !o)}
-          className="absolute bottom-4 left-3 z-[1000] bg-white rounded-full shadow-lg p-3"
+          className="absolute bottom-20 left-3 z-[1200] bg-white rounded-full shadow-lg p-3"
           aria-label="Legenda"
         >
           <BookOpen size={22} className="text-blue-600" />
         </button>
-        <button data-testid="peta-navigation" className="absolute bottom-4 right-3 z-[1000] bg-blue-600 rounded-full shadow-lg p-3" aria-label="Navigasi">
+        <button data-testid="peta-navigation" className="absolute bottom-20 right-3 z-[1200] bg-blue-600 rounded-full shadow-lg p-3" aria-label="Navigasi">
           <Navigation size={22} className="text-white" />
         </button>
 
@@ -129,7 +129,7 @@ export default function Peta() {
           type="button"
           data-testid="peta-menu"
           onClick={() => setShowNavOverlay(true)}
-          className="absolute bottom-16 left-1/2 -translate-x-1/2 z-[1000] bg-blue-600 text-white rounded-full shadow-lg px-4 py-2.5 flex items-center gap-2"
+          className="absolute bottom-20 left-1/2 -translate-x-1/2 z-[1200] bg-blue-600 text-white rounded-full shadow-lg px-4 py-2.5 flex items-center gap-2"
           aria-label="Tampilkan menu"
         >
           <Menu size={20} />
