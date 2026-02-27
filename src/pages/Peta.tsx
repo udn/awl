@@ -62,7 +62,7 @@ export default function Peta() {
   }, [])
 
   return (
-    <div className="flex flex-col h-screen bg-gray-50">
+    <div className="flex flex-col h-dvh bg-gray-50">
       {/* Header */}
       <div className="bg-white flex items-center gap-3 px-4 pt-10 pb-3 shadow-sm z-[1100]">
         <Compass size={22} className="text-blue-600" />
